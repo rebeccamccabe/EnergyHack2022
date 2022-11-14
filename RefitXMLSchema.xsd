@@ -1,0 +1,1867 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema targetNamespace="http://www.refitsmarthomes.org"
+    elementFormDefault="qualified"
+    xmlns:refit="http://www.refitsmarthomes.org"
+    xmlns:xs="http://www.w3.org/2001/XMLSchema"
+>
+  <xs:annotation>
+    <xs:documentation>
+
+      RefitXML schema, June 2017.
+
+      This XML schema describes the format and structure of the 'REFIT_BUILDING_SURVEY.xml' file.
+
+      This schema is maintained by Steven Firth (s.k.firth@lboro.ac.uk), Building Energy Research Group (BERG), School of Civil and Building Engineering, Loughborough University.
+
+      The schema described in this file forms part of the REFIT Smart Home dataset, available here: https://doi.org/10.17028/rd.lboro.2070091
+
+      Further information on the REFIT project is available here: http://www.refitsmarthomes.org
+
+      A number of response options to questions are based on the English housing survey 2011 to 2012: physical survey form.
+      This is available here: https://www.gov.uk/government/publications/english-housing-survey-2011-to-2012-questionnaire-and-physical-survey-form
+      This used under the following license: https://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/
+
+    </xs:documentation>
+  </xs:annotation>
+  
+  <xs:element name="RefitXML" type="refit:RefitXML"></xs:element>
+
+  <xs:complexType name="RefitXML">
+    <xs:annotation>
+      <xs:documentation>This is the root node of the refitXML schema</xs:documentation>
+    </xs:annotation>
+    <xs:choice minOccurs="0" maxOccurs="unbounded">
+      <xs:element name="Stock" type="refit:Stock"></xs:element>
+    </xs:choice>
+    <xs:attributeGroup ref="refit:genericObjectAttributes"></xs:attributeGroup>
+  </xs:complexType> 
+  
+  <xs:complexType name="Stock">
+    <xs:annotation>
+      <xs:documentation>This is a Stock object. Stocks represent a stock or group of buildings. </xs:documentation>
+    </xs:annotation>
+    <xs:choice minOccurs="0" maxOccurs="unbounded">
+      <xs:element name ="Climate" type="refit:Climate"></xs:element>
+      <xs:element name ="Building" type="refit:Building"></xs:element>
+      <xs:element name ="TimeSeriesVariable" type="refit:TimeSeriesVariable"></xs:element>
+    </xs:choice>
+    <xs:attributeGroup ref="refit:genericObjectAttributes"></xs:attributeGroup>
+  </xs:complexType>
+
+  <xs:complexType name="Climate">
+    <xs:annotation>
+      <xs:documentation>This is a Climate object. Climates represent the external climate for a particular location. </xs:documentation>
+    </xs:annotation>
+    <xs:choice minOccurs="0" maxOccurs="unbounded">
+      <xs:element name ="Sensor" type="refit:Sensor"></xs:element>
+      <xs:element name ="TimeSeriesVariable" type="refit:TimeSeriesVariable"></xs:element>
+    </xs:choice>
+    <xs:attributeGroup ref="refit:genericObjectAttributes"></xs:attributeGroup>
+    <xs:attribute name="longitude" type="xs:double">
+      <xs:annotation>
+        <xs:documentation>The 'longitude' attribute gives the longitude of the position of the object.</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="latitude" type="xs:double">
+      <xs:annotation>
+        <xs:documentation>The 'latitude' attribute gives the latitude of the position of the object.</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+  </xs:complexType>
+
+  <!--BUILDINGS-->
+
+  <xs:complexType name="Building">
+    <xs:annotation>
+      <xs:documentation>This is a Building object. Buildings represent an instance of a building.</xs:documentation>
+    </xs:annotation>
+    <xs:choice minOccurs="0" maxOccurs="unbounded">
+      <xs:element name ="Household" type="refit:Household"></xs:element>
+      <xs:element name ="Appliance" type="refit:Appliance"></xs:element>
+      <xs:element name ="Cooker" type="refit:Cooker"></xs:element>
+      <xs:element name ="WaterOutlet" type="refit:WaterOutlet"></xs:element>
+      <xs:element name ="HotWaterCylinder" type="refit:HotWaterCylinder"></xs:element>
+      <xs:element name ="FixedHeater" type="refit:FixedHeater"></xs:element>
+      <xs:element name ="Light" type="refit:Light"></xs:element>
+      <xs:element name ="Plug" type="refit:Plug"></xs:element>
+      <xs:element name ="Radiator" type="refit:Radiator"></xs:element>
+      <xs:element name ="RoomThermostat" type="refit:RoomThermostat"></xs:element>
+      <xs:element name ="ConstructionType" type="refit:ConstructionType"></xs:element>
+      <xs:element name ="DayScheduleType" type="refit:DayScheduleType"></xs:element>
+      <xs:element name ="MaterialType" type="refit:MaterialType"></xs:element>
+      <xs:element name ="ScheduleType" type="refit:ScheduleType"></xs:element>
+      <xs:element name ="WeekScheduleType" type="refit:WeekScheduleType"></xs:element>
+      <xs:element name ="WindowConstructionType" type="refit:WindowConstructionType"></xs:element>
+      <xs:element name ="Zone" type="refit:Zone"></xs:element>
+      <xs:element name ="Circuit" type="refit:Circuit"></xs:element>
+      <xs:element name ="Meter" type="refit:Meter"></xs:element>
+      <xs:element name ="Space" type="refit:Space"></xs:element>
+      <xs:element name ="Surface" type="refit:Surface"></xs:element>
+      <xs:element name ="Boiler" type="refit:Boiler"></xs:element>
+      <xs:element name ="PhotovoltaicArray" type="refit:PhotovoltaicArray"></xs:element>
+      <xs:element name ="SolarThermalArray" type="refit:SolarThermalArray"></xs:element>
+      <xs:element name ="HeatPump" type="refit:HeatPump"></xs:element>
+      <xs:element name ="Sensor" type="refit:Sensor"></xs:element>
+      <xs:element name ="TimeSeriesVariable" type="refit:TimeSeriesVariable"></xs:element>
+    </xs:choice>
+    <xs:attributeGroup ref="refit:genericObjectAttributes"></xs:attributeGroup>
+    <xs:attribute name="occupancyType" type="refit:occupancyType">
+      <xs:annotation>
+        <xs:documentation>The 'occupancyType' attribute is the type of occupancy (single family dwelling, shared house etc) of the building, chosen from a list.</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="builtFormType" type="refit:builtFormType">
+      <xs:annotation>
+        <xs:documentation>The 'dwellingType' attribute is the built form type of the building, chosen from a list.</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="longitude" type="xs:double">
+      <xs:annotation>
+        <xs:documentation>The 'longitude' attribute gives the longitude of the position of the object, and the origin of the local coordinate system.</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="latitude" type="xs:double">
+      <xs:annotation>
+        <xs:documentation>The 'latitude' attribute gives the latitude of the position of the object, and the origin of the local coordinate system.</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="orientation" type="xs:double">
+      <xs:annotation>
+        <xs:documentation>The 'orientation' attribute gives the orientation of the y-axis of the local coordinate system (often this will be the orientation of the front or back wall).</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="wallTypeMainBuilding" type="refit:wallType">
+      <xs:annotation>
+        <xs:documentation>The 'wallTypeMainBuilding' attribute is the wall type of the main building, chosen from a list. 'Main building' refers to the origianl building construction, rather than any later extensions.</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="wallAgeBandMainBuilding" type="refit:wallAgeBand">
+      <xs:annotation>
+        <xs:documentation>The 'wallAgeBandMainBuilding' attribute is the age band of the wall of the main building, chosen from a list. This is usually equivalent to when the building was first constructed.</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="wallTypeExtension" type="refit:wallType">
+      <xs:annotation>
+        <xs:documentation>The 'wallTypeExtension' attribute is the wall type of the extension (if any), chosen from a list. 'Extension' refers to any part of the building which was constructed at a later date after the building was first constructed.</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="wallAgeBandExtension" type="refit:wallAgeBand">
+      <xs:annotation>
+        <xs:documentation>The 'constructionAgeBandExtension' attribute is the age band of the extension (if any), chosen from a list.</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="wallNote" type="xs:string">
+      <xs:annotation>
+        <xs:documentation>The 'wallNote' attribute is any additional notes about the wall constructions.</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="cavityWallInsulationPresent" type="refit:YesNoList">
+      <xs:annotation>
+        <xs:documentation>The 'cavityWallInsulationPresent' attribute is 'Yes' if cavity wall insulation is present in the 'Main Building' wall type, otherwise 'No'.</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="cavityWallInsulationNote" type="xs:string">
+      <xs:annotation>
+        <xs:documentation>The 'cavityWallInsulationNote' attribute is any additional notes about the cavity wall insulation.</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="windowType" type="refit:windowType">
+      <xs:annotation>
+        <xs:documentation>The 'windowType' attribute is the window type (single glazed, double glazed etc.) for the windows in the building, chosen from a list. This represents the window type for all or the majority of windows present.</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="windowNote" type="xs:string">
+      <xs:annotation>
+        <xs:documentation>The 'windowNote' attribute is any additional notes about the windows.</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="loftType" type="refit:loftType">
+      <xs:annotation>
+        <xs:documentation>The 'loftType' attribute is the loft type for the main loft space in the building, chosen from a list.</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="loftInsulationType" type="refit:loftInsulationType">
+      <xs:annotation>
+        <xs:documentation>The 'loftInsulationType' attribute is the type of insulation used in the main loft space in the building, chosen from a list.</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="loftInsulationThickness" type="refit:loftInsulationThickness">
+      <xs:annotation>
+        <xs:documentation>The 'loftInsulationType' attribute is the thickness of the insulation used in the main loft space in the building, chosen from a list.</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="loftNote" type="xs:string">
+      <xs:annotation>
+        <xs:documentation>The 'loftNote' attribute is any additional notes about the main loft space in the building.</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+  </xs:complexType>
+
+  <xs:complexType name="Zone">
+    <xs:annotation>
+      <xs:documentation>This is a Zone object. A 'zone' is a thermal zone, as used in thermal modelling and represents one or more Spaces.</xs:documentation>
+    </xs:annotation>
+    <xs:choice minOccurs="0" maxOccurs="unbounded">
+      <xs:element name ="Zone_space" type="refit:Sensor"></xs:element>
+      <xs:element name ="Sensor" type="refit:Sensor"></xs:element>
+      <xs:element name ="TimeSeriesVariable" type="refit:TimeSeriesVariable"></xs:element>
+    </xs:choice>
+    <xs:attributeGroup ref="refit:genericObjectAttributes"></xs:attributeGroup>
+  </xs:complexType>
+
+  <xs:complexType name="Zone_space">
+    <xs:annotation>
+      <xs:documentation>This is a Zone_space object. Each Zone can list the spaces contained within the Zone using a list of Zone_space objects.</xs:documentation>
+    </xs:annotation>
+    <xs:attribute name="spaceIdRef" type="xs:string">
+      <xs:annotation>
+        <xs:documentation>The 'spaceIdRef' attribute is a reference a Space object, using the 'id' attribute of the Space object.</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+  </xs:complexType>
+
+  <!--HOUSEHOLDS-->
+
+  <xs:complexType name="Household">
+    <xs:annotation>
+      <xs:documentation>This is a Household object. Households represent a group of people living together in a dwelling. </xs:documentation>
+    </xs:annotation>
+    <xs:choice minOccurs="0" maxOccurs="unbounded">
+      <xs:element name ="Person" type="refit:Person"></xs:element>
+    </xs:choice>
+    <xs:attributeGroup ref="refit:genericObjectAttributes"></xs:attributeGroup>
+  </xs:complexType>
+
+  <xs:complexType name="Person">
+    <xs:annotation>
+      <xs:documentation>This is a Person. A person is a member of a household.</xs:documentation>
+    </xs:annotation>
+    <xs:attributeGroup ref="refit:genericObjectAttributes"></xs:attributeGroup>
+    <xs:attribute name="sex" type="refit:sex">
+      <xs:annotation>
+        <xs:documentation>The 'sex' attribute gives the sex (male/female) of the person.</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="age" type="xs:integer">
+      <xs:annotation>
+        <xs:documentation>The 'age' attribute is the age of the person.</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="ageBand" type="refit:ageBand">
+      <xs:annotation>
+        <xs:documentation>The 'ageBand' attribute is the age band of the person, chosen from a list.</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="livesPermanemntlyAtHome" type="refit:YesNoList">
+      <xs:annotation>
+        <xs:documentation>The 'livesPermanemntlyAtHome' attribute is 'Yes' if the person lives permenantly at home, otherwise 'No'.</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="isHouseholdReferencePerson" type="refit:YesNoList">
+      <xs:annotation>
+        <xs:documentation>The 'isHouseholdReferencePerson' attribute is 'Yes' if the person is the Household Reference Person, otherwise 'No'.</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="employmentStatus" type="refit:employmentStatus">
+      <xs:annotation>
+        <xs:documentation>The 'employmentStatus' attribute gives the employmeny status of the person, chosen from a list.</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="profession" type="xs:string">
+      <xs:annotation>
+        <xs:documentation>The 'profession' attribute gives the profession of the person.</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+  </xs:complexType>
+
+  <!--ENERGY SYSTEMS-->
+  
+  <xs:complexType name="Boiler">
+    <xs:annotation>
+      <xs:documentation>This is a Boiler object.</xs:documentation>
+    </xs:annotation>
+    <xs:choice minOccurs="0" maxOccurs="unbounded">
+      <xs:element name ="BoilerControl" type="refit:BoilerControl"></xs:element>
+      <xs:element name ="Boiler_radiator" type="refit:Boiler_radiator"></xs:element>
+      <xs:element name ="Sensor" type="refit:Sensor"></xs:element>
+      <xs:element name ="TimeSeriesVariable" type="refit:TimeSeriesVariable"></xs:element>
+    </xs:choice>
+    <xs:attributeGroup ref="refit:genericObjectAttributes"></xs:attributeGroup>
+    <xs:attribute name="boilerType" type="refit:boilerType">
+      <xs:annotation>
+        <xs:documentation>The 'boilerType' attribute represents the type of boiler.</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="boilerAge" type="xs:integer">
+      <xs:annotation>
+        <xs:documentation>The 'boilerAge' attribute gives the boiler age in years.</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="manufacturer" type="xs:string">
+      <xs:annotation>
+        <xs:documentation>The 'manufacturer' attribute is the manufacturer of the boiler.</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="model" type="xs:string">
+      <xs:annotation>
+        <xs:documentation>The 'model' attribute is the model of the boiler.</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="fuelType" type="refit:fuelType">
+      <xs:annotation>
+        <xs:documentation>The 'fuelType' attribute is the fuel (e.g gas or electricity) used by the boiler, chosen from a list.</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="spaceIdRef" type="xs:string">
+      <xs:annotation>
+        <xs:documentation>The 'spaceIdRef' attribute is a reference a Space object, using the 'id' attribute of the Space object.</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="capacity" type="xs:double">
+      <xs:annotation>
+        <xs:documentation>The 'capacity' attribute gives the rated power capacity of the heat pump, in W.</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+  </xs:complexType>
+
+  <xs:complexType name="Boiler_radiator">
+    <xs:annotation>
+      <xs:documentation>This is a Boiler_radiator object. Each Boiler can list the radiator supplied by the Boiler using a list of Boiler_radiator objects. The list starts with the first radiator on the hot water supply loop, and lists the Radiators in order.</xs:documentation>
+    </xs:annotation>
+    <xs:attribute name="radiatorIdRef" type="xs:string">
+      <xs:annotation>
+        <xs:documentation>The 'radiatorIdRef' attribute is a reference a Radiator object, using the 'id' attribute of the Radiator object.</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+  </xs:complexType>
+  
+  <xs:complexType name="BoilerControl">
+    <xs:annotation>
+      <xs:documentation>This is a BoilerControl object. It represents the controls associated with a boiler, such as a programmable timer.</xs:documentation>
+    </xs:annotation>
+    <xs:choice minOccurs="0" maxOccurs="unbounded">
+      <xs:element name ="Sensor" type="refit:Sensor"></xs:element>
+      <xs:element name ="TimeSeriesVariable" type="refit:TimeSeriesVariable"></xs:element>
+    </xs:choice>
+    <xs:attributeGroup ref="refit:genericObjectAttributes"></xs:attributeGroup>
+    <xs:attribute name="onOffControl" type="refit:YesNoList">
+      <xs:annotation>
+        <xs:documentation>The 'onOffControl' attribute is 'Yes' if the Boiler controls has an On/Off function, otherwise 'No'.</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="boilerThermostat" type="refit:YesNoList">
+      <xs:annotation>
+        <xs:documentation>The 'boilerThermostat' attribute is 'Yes' if the Boiler has a thermostat control regulating the hot water supply temperature, otherwise 'No'.</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="boilerThermostatScheduleTypeIdRef" type="xs:string">
+      <xs:annotation>
+        <xs:documentation>The 'boilerThermostatScheduleTypeIdRef' attribute is a reference a ScheduleType, using the 'id' attribute of the ScheduleType object. This gives the schedule of the boiler thermostat, in degrees C.</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="boilerTimer" type="refit:YesNoList">
+      <xs:annotation>
+        <xs:documentation>The 'boilerTimer' attribute is 'Yes' if the Boiler has a timer, otherwise 'No'.</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="boilerTimerScheduleTypeIdRef" type="xs:string">
+      <xs:annotation>
+        <xs:documentation>The 'boilerTimerScheduleTypeIdRef' attribute is a reference a ScheduleType, using the 'id' attribute of the ScheduleType object. This gives the schedule of the boiler timer, where '1' is on and '0' is off.</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="manualOverride" type="refit:YesNoList">
+      <xs:annotation>
+        <xs:documentation>The 'manualOverride' attribute is 'Yes' if the Boiler has a manual override function, otherwise 'No'.</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="zoneControl" type="refit:YesNoList">
+      <xs:annotation>
+        <xs:documentation>The 'zoneControl' attribute is 'Yes' if the Boiler has zonal controls associated with it, otherwise 'No'.</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="boilerControlNote" type="xs:string">
+      <xs:annotation>
+        <xs:documentation>The 'boilerControlNote' attribute is any additional notes about the boilr controls.</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+  </xs:complexType>
+  
+  <xs:complexType name="PhotovoltaicArray">
+    <xs:annotation>
+      <xs:documentation>This is a PhotovoltaicArray object. It represents a PV array mounted on the building.</xs:documentation>
+    </xs:annotation>
+    <xs:choice minOccurs="0" maxOccurs="unbounded">
+      <xs:element name ="Sensor" type="refit:Sensor"></xs:element>
+      <xs:element name ="TimeSeriesVariable" type="refit:TimeSeriesVariable"></xs:element>
+    </xs:choice>
+    <xs:attributeGroup ref="refit:genericObjectAttributes"></xs:attributeGroup>
+    <xs:attribute name="ratingWp" type="xs:double">
+      <xs:annotation>
+        <xs:documentation>The 'ratingWp' attribute is the rated power of the PV array in Wp.</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="surfaceIdRef" type="xs:string">
+      <xs:annotation>
+        <xs:documentation>The 'surfaceIdRef' attribute is a reference a Surface object which the PV array is mounted on, using the 'id' attribute of the Surface object.</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="numberOfModules" type="xs:integer">
+      <xs:annotation>
+        <xs:documentation>The 'numberOfModules' attribute gives the number of modules in the PV array.</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="moduleTypeIdRef" type="xs:string">
+      <xs:annotation>
+        <xs:documentation>The 'moduleTypeIdRef' attribute is is a reference to type of PV modules used in the PV array, using the 'id' attribute of a PhotovoltaicModuleType type.</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+  </xs:complexType>
+
+  <xs:complexType name="PhotovoltaicModuleType">
+    <xs:annotation>
+      <xs:documentation>This is a PhotovoltaicModuleType type.</xs:documentation>
+    </xs:annotation>
+    <xs:attributeGroup ref="refit:genericTypeAttributes"></xs:attributeGroup>
+    <xs:attribute name="ratingWp" type="xs:double">
+      <xs:annotation>
+        <xs:documentation>The 'ratingWp' attribute is the rated power of the PV module in Wp.</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="ratedEfficiency" type="xs:double">
+      <xs:annotation>
+        <xs:documentation>The 'ratedEfficiency' attribute is the rated efficiency of the PV module, between 0 and 1.</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="temperatureCoefficientOfPower" type="xs:double">
+      <xs:annotation>
+        <xs:documentation>The 'temperatureCoefficientOfPower' attribute is the temperature coeffciient of power of the PV module, in %/K.</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="NOCT" type="xs:double">
+      <xs:annotation>
+        <xs:documentation>The 'NOCT' attribute is the Nominal Operating Cell Temperature, in degrees C.</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="manufacturer" type="xs:string">
+      <xs:annotation>
+        <xs:documentation>The 'manufacturer' attribute gives the manufacturer of the PV module.</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="model" type="xs:string">
+      <xs:annotation>
+        <xs:documentation>The 'model' attribute gives the model of the PV module.</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+  </xs:complexType>
+  
+  <xs:complexType name="SolarThermalArray">
+    <xs:annotation>
+      <xs:documentation>This is a SolarThermalArray object. It represents an array of soalr thermal collectors mounted on the building.</xs:documentation>
+    </xs:annotation>
+    <xs:choice minOccurs="0" maxOccurs="unbounded">
+      <xs:element name ="Sensor" type="refit:Sensor"></xs:element>
+      <xs:element name ="TimeSeriesVariable" type="refit:TimeSeriesVariable"></xs:element>
+    </xs:choice>
+    <xs:attributeGroup ref="refit:genericObjectAttributes"></xs:attributeGroup>
+    <xs:attribute name="surfaceIdRef" type="xs:string">
+      <xs:annotation>
+        <xs:documentation>The 'surfaceIdRef' attribute is a reference a Surface object which the PV array is mounted on, using the 'id' attribute of the Surface object.</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+  </xs:complexType>
+
+  <xs:complexType name="HeatPump">
+    <xs:annotation>
+      <xs:documentation>This is a HeatPump object. It represents a heat pump installed in the building.</xs:documentation>
+    </xs:annotation>
+    <xs:choice minOccurs="0" maxOccurs="unbounded">
+      <xs:element name ="Sensor" type="refit:Sensor"></xs:element>
+      <xs:element name ="TimeSeriesVariable" type="refit:TimeSeriesVariable"></xs:element>
+    </xs:choice>
+    <xs:attributeGroup ref="refit:genericObjectAttributes"></xs:attributeGroup>
+    <xs:attribute name="manufacturer" type="xs:string">
+      <xs:annotation>
+        <xs:documentation>The 'manufacturer' attribute gives the manufacturer of the heat pump.</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="model" type="xs:string">
+      <xs:annotation>
+        <xs:documentation>The 'model' attribute gives the model of the heat pump.</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="catacity" type="xs:double">
+      <xs:annotation>
+        <xs:documentation>The 'capacity' attribute gives the rated power capacity of the heat pump, in W.</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="COP" type="xs:double">
+      <xs:annotation>
+        <xs:documentation>The 'COP' attribute is the rated coefficient of performance of the heat pump.</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="spaceIdRef" type="xs:string">
+      <xs:annotation>
+        <xs:documentation>The 'spaceIdRef' attribute is a reference a Space object, using the 'id' attribute of the Space object.</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+  </xs:complexType>
+
+  <!--METERS AND CIRCUITS-->
+
+  <xs:complexType name="Meter">
+    <xs:annotation>
+      <xs:documentation>This is a Meter object. It represents a meter installed in the building.</xs:documentation>
+    </xs:annotation>
+    <xs:choice minOccurs="0" maxOccurs="unbounded">
+      <xs:element name ="Sensor" type="refit:Sensor"></xs:element>
+      <xs:element name ="TimeSeriesVariable" type="refit:TimeSeriesVariable"></xs:element>
+    </xs:choice>
+    <xs:attributeGroup ref="refit:genericObjectAttributes"></xs:attributeGroup>
+    <xs:attribute name="meterType" type="refit:meterType">
+      <xs:annotation>
+        <xs:documentation>The 'meterType' attribute is the type of the meter (electricity, gas, water etc.), chosen from a list.</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+  </xs:complexType>
+
+  <xs:complexType name="Circuit">
+    <xs:annotation>
+      <xs:documentation>This is a Circuit object.</xs:documentation>
+    </xs:annotation>
+    <xs:choice minOccurs="0" maxOccurs="unbounded">
+      <xs:element name ="Sensor" type="refit:Sensor"></xs:element>
+      <xs:element name ="TimeSeriesVariable" type="refit:TimeSeriesVariable"></xs:element>
+    </xs:choice>
+    <xs:attributeGroup ref="refit:genericObjectAttributes"></xs:attributeGroup>
+    <xs:attribute name="circuitType" type="xs:string">
+      <xs:annotation>
+        <xs:documentation>The 'circuitType' attribute is the type of the circuit (plugs, lighting, cooker etc.).</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+  </xs:complexType>
+  
+  <!--SPACES AND SPACE OBJECTS-->
+  
+  <xs:complexType name="Space">
+    <xs:annotation>
+      <xs:documentation>This is a Space object. Spaces represent the rooms in a building.</xs:documentation>
+    </xs:annotation>
+    <xs:choice minOccurs="0" maxOccurs="unbounded">
+      <xs:element name ="Sensor" type="refit:Sensor"></xs:element>
+      <xs:element name ="TimeSeriesVariable" type="refit:TimeSeriesVariable"></xs:element>
+    </xs:choice>
+    <xs:attributeGroup ref="refit:genericObjectAttributes"></xs:attributeGroup>
+    <xs:attribute name="conditionType" type="refit:conditionType">
+      <xs:annotation>
+        <xs:documentation>The 'conditionType' attribute states if and how the space is condition (i.e. heated, cooled), chosen from a list.</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="area" type="xs:double">
+      <xs:annotation>
+        <xs:documentation>The 'area' attribute gives the area of the Space, in m2.</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="volume" type="xs:double">
+      <xs:annotation>
+        <xs:documentation>The 'volume' attribute gives the volume of the Space, in m3.</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="storeyLevel" type="xs:double">
+      <xs:annotation>
+        <xs:documentation>The 'storeyLevel' attribute gives the storey that the Space is located on. '0' represents the ground floor and '-1' represents a basement.</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="roomType" type="refit:roomType">
+      <xs:annotation>
+        <xs:documentation>The 'roomType' attribute gives the type of room (kitchen, bedroom etc.), chosen from a list.</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="numberOfOpenFireplaces" type="xs:integer">
+      <xs:annotation>
+        <xs:documentation>The 'numberOfOpenFireplaces' attribute gives the number of open fireplaces in the Space.</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="numberOfExtractorFans" type="xs:integer">
+      <xs:annotation>
+        <xs:documentation>The 'numberOfExtractorFans' attribute gives the number of extractor fans in the Space.</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="numberOfAirVents" type="xs:integer">
+      <xs:annotation>
+        <xs:documentation>The 'numberOfAirVents' attribute gives the number of air vents in the Space.</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="ventilationScheduleTypeIdRef" type="xs:string">
+      <xs:annotation>
+        <xs:documentation>The 'ventilationScheduleTypeIdRef' attribute is a reference a ScheduleType, using the 'id' attribute of the ScheduleType object. This gives the schedule of the ventilation rate in the Space, in air changes per hour.</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="peopleHeatGainsScheduleTypeIdRef" type="xs:string">
+      <xs:annotation>
+        <xs:documentation>The 'peopleHeatGainsScheduleTypeIdRef' attribute is a reference a ScheduleType, using the 'id' attribute of the ScheduleType object. This gives the schedule of the heat gains from people in the Space, in Watts.</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="equipmentHeatGainsScheduleTypeIdRef" type="xs:string">
+      <xs:annotation>
+        <xs:documentation>The 'equipmentHeatGainsScheduleTypeIdRef' attribute is a reference a ScheduleType, using the 'id' attribute of the ScheduleType object. This gives the schedule of the heat gains from equipment (including lights, appliances, cookers, hot water outlets etc.) in the Space, in Watts.</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+  </xs:complexType>
+
+  <xs:complexType name="Appliance">
+    <xs:annotation>
+      <xs:documentation>This is an Appliance object. It represents a household appliance placed in a Space.</xs:documentation>
+    </xs:annotation>
+    <xs:choice minOccurs="0" maxOccurs="unbounded">
+      <xs:element name ="Sensor" type="refit:Sensor"></xs:element>
+      <xs:element name ="TimeSeriesVariable" type="refit:TimeSeriesVariable"></xs:element>
+    </xs:choice>
+    <xs:attributeGroup ref="refit:genericObjectAttributes"></xs:attributeGroup>
+    <xs:attribute name="applianceType" type="refit:applianceType">
+      <xs:annotation>
+        <xs:documentation>The 'applianceType' attribute represents the type of appliance.</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="plugIdRef" type="xs:string">
+      <xs:annotation>
+        <xs:documentation>The 'plugIdRef' attribute is a reference a Plug object which the Appliance is plugged into, using the 'id' attribute of the Plug object.</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="spaceIdRef" type="xs:string">
+      <xs:annotation>
+        <xs:documentation>The 'spaceIdRef' attribute is a reference a Space object, using the 'id' attribute of the Space object.</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="manufacturer" type="xs:string">
+      <xs:annotation>
+        <xs:documentation>The 'manufacturer' attribute is the manufacturer of the appliance.</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="model" type="xs:string">
+      <xs:annotation>
+        <xs:documentation>The 'model' attribute is the model of the appliance.</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+  </xs:complexType>
+  
+  <xs:complexType name="Cooker">
+    <xs:annotation>
+      <xs:documentation>This is a Cooker object. It represents a cooker appliance placed in a Space.</xs:documentation>
+    </xs:annotation>
+    <xs:choice minOccurs="0" maxOccurs="unbounded">
+      <xs:element name ="Sensor" type="refit:Sensor"></xs:element>
+      <xs:element name ="TimeSeriesVariable" type="refit:TimeSeriesVariable"></xs:element>
+    </xs:choice>
+    <xs:attributeGroup ref="refit:genericObjectAttributes"></xs:attributeGroup>
+    <xs:attribute name="hobFuelType" type="refit:fuelType">
+      <xs:annotation>
+        <xs:documentation>The 'hobFuelType' attribute is the fuel type of the hob (gas, electric), chosen from a list.</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="ovenFuelType" type="refit:fuelType">
+      <xs:annotation>
+        <xs:documentation>The 'ovenFuelType' attribute is the fuel type of the oven (gas, electric), chosen from a list.</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="spaceIdRef" type="xs:string">
+      <xs:annotation>
+        <xs:documentation>The 'spaceIdRef' attribute is a reference a Space object, using the 'id' attribute of the Space object.</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+  </xs:complexType>
+
+  <xs:complexType name="WaterOutlet">
+    <xs:annotation>
+      <xs:documentation>This is a WaterOutlet object. It represents a water outlet (e.g. shower, tap) in a Space.</xs:documentation>
+    </xs:annotation>
+    <xs:choice minOccurs="0" maxOccurs="unbounded">
+      <xs:element name ="Sensor" type="refit:Sensor"></xs:element>
+      <xs:element name ="TimeSeriesVariable" type="refit:TimeSeriesVariable"></xs:element>
+    </xs:choice>
+    <xs:attributeGroup ref="refit:genericObjectAttributes"></xs:attributeGroup>
+    <xs:attribute name="waterOutletType" type="refit:waterOutletType">
+      <xs:annotation>
+        <xs:documentation>The 'waterOutletType' attribute gives the type of water outlet (e.g. shower, tap), chosen from a list.</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="waterHeatingType" type="refit:waterHeatingType">
+      <xs:annotation>
+        <xs:documentation>The 'waterHeatingType' attribute gives the method of water heating (e.g. direct electric, boiler), chosen from a list.</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="spaceIdRef" type="xs:string">
+      <xs:annotation>
+        <xs:documentation>The 'spaceIdRef' attribute is a reference a Space object, using the 'id' attribute of the Space object.</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+  </xs:complexType>
+
+  <xs:complexType name="HotWaterCylinder">
+    <xs:annotation>
+      <xs:documentation>This is a HotWaterCylinder object. It represents a hot water cylinder placed in a Space.</xs:documentation>
+    </xs:annotation>
+    <xs:choice minOccurs="0" maxOccurs="unbounded">
+      <xs:element name ="Sensor" type="refit:Sensor"></xs:element>
+      <xs:element name ="TimeSeriesVariable" type="refit:TimeSeriesVariable"></xs:element>
+    </xs:choice>
+    <xs:attributeGroup ref="refit:genericObjectAttributes"></xs:attributeGroup>
+    <xs:attribute name="cylinderSize" type="refit:cylinderSize">
+      <xs:annotation>
+        <xs:documentation>The 'cylinderSize' attribute gives the size of the hot water cylinder, chosen from a list.</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="cylinderInsulationType" type="refit:cylinderInsulationType">
+      <xs:annotation>
+        <xs:documentation>The 'cylinderInsulationType' attribute gives the type of insulation of the hot water cylinder, chosen from a list.</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="cylinderInsulationThickness" type="refit:cylinderInsulationThickness">
+      <xs:annotation>
+        <xs:documentation>The 'cylinderInsulationThickness' attribute gives the thickness of the insulation of the hot water cylinder, chosen from a list.</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="hasSingleImmersionHeater" type="refit:YesNoList">
+      <xs:annotation>
+        <xs:documentation>The 'hasSingleImmersionHeater' attribute is 'Yes' if the hot water cylinder has a single immersion heater, otherwise 'No'.</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="hasDualImmersionHeater" type="refit:YesNoList">
+      <xs:annotation>
+        <xs:documentation>The 'hasDualImmersionHeater' attribute is 'Yes' if the hot water cylinder has a dual immersion heater, otherwise 'No'.</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="cylinderNote" type="xs:string">
+      <xs:annotation>
+        <xs:documentation>The 'cylinderNote' attribute is any additional notes about the hot water cylinder.</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="spaceIdRef" type="xs:string">
+      <xs:annotation>
+        <xs:documentation>The 'spaceIdRef' attribute is a reference a Space object, using the 'id' attribute of the Space object.</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+  </xs:complexType>
+
+  <xs:complexType name="FixedHeater">
+    <xs:annotation>
+      <xs:documentation>This is a FixedHeater object. It represents a fixed heater (e.g. gas fire, electric storage heater, wood stove) installed in a Space.</xs:documentation>
+    </xs:annotation>
+    <xs:choice minOccurs="0" maxOccurs="unbounded">
+      <xs:element name ="Sensor" type="refit:Sensor"></xs:element>
+      <xs:element name ="TimeSeriesVariable" type="refit:TimeSeriesVariable"></xs:element>
+    </xs:choice>
+    <xs:attributeGroup ref="refit:genericObjectAttributes"></xs:attributeGroup>
+    <xs:attribute name="fixedHeaterType" type="refit:fixedHeaterType">
+      <xs:annotation>
+        <xs:documentation>The 'fixedHeaterType' attribute gives the type of fixed heater, chosen from a list.</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="manufacturer" type="xs:string">
+      <xs:annotation>
+        <xs:documentation>The 'manufacturer' attribute is the manufacturer of the fixed heater.</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="model" type="xs:string">
+      <xs:annotation>
+        <xs:documentation>The 'model' attribute is the model of the fixed heater.</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="fuelType" type="refit:fuelType">
+      <xs:annotation>
+        <xs:documentation>The 'fuelType' attribute is the fuel (e.g gas or electricity) used by the fixed heater, chosen from a list.</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="ratedPower" type="xs:double">
+      <xs:annotation>
+        <xs:documentation>The 'ratedPower' attribute gives the rated power of the fixed heater, in W.</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="spaceIdRef" type="xs:string">
+      <xs:annotation>
+        <xs:documentation>The 'spaceIdRef' attribute is a reference a Space object, using the 'id' attribute of the Space object.</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+  </xs:complexType>
+
+  <xs:complexType name="Light">
+    <xs:annotation>
+      <xs:documentation>This is a Light object. It represents a light fitting installed in a Space.</xs:documentation>
+    </xs:annotation>
+    <xs:choice minOccurs="0" maxOccurs="unbounded">
+      <xs:element name ="Sensor" type="refit:Sensor"></xs:element>
+      <xs:element name ="TimeSeriesVariable" type="refit:TimeSeriesVariable"></xs:element>
+    </xs:choice>
+    <xs:attributeGroup ref="refit:genericObjectAttributes"></xs:attributeGroup>
+    <xs:attribute name="numberOfBulbs" type="xs:integer">
+      <xs:annotation>
+        <xs:documentation>The 'numberOfBulbs' attribute gives the number of light bulbs in the light fitting.</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="lightBulbType" type="xs:string">
+      <xs:annotation>
+        <xs:documentation>The 'lightBulbType' attribute gives the type of light bulbs, chosen from a list.</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="lightSwitchType" type="xs:string">
+      <xs:annotation>
+        <xs:documentation>The 'lightSwitchType' attribute gives the type of light switch, chosen from a list.</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="spaceIdRef" type="xs:string">
+      <xs:annotation>
+        <xs:documentation>The 'spaceIdRef' attribute is a reference a Space object, using the 'id' attribute of the Space object.</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+  </xs:complexType>
+
+  <xs:complexType name="Plug">
+    <xs:annotation>
+      <xs:documentation>This is a Plug object. It represents a plug or wall socket in a Space.</xs:documentation>
+    </xs:annotation>
+    <xs:choice minOccurs="0" maxOccurs="unbounded">
+      <xs:element name ="Sensor" type="refit:Sensor"></xs:element>
+      <xs:element name ="TimeSeriesVariable" type="refit:TimeSeriesVariable"></xs:element>
+    </xs:choice>
+    <xs:attributeGroup ref="refit:genericObjectAttributes"></xs:attributeGroup>
+    <xs:attribute name="spaceIdRef" type="xs:string">
+      <xs:annotation>
+        <xs:documentation>The 'spaceIdRef' attribute is a reference a Space object, using the 'id' attribute of the Space object.</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+  </xs:complexType>
+
+  <xs:complexType name="Radiator">
+    <xs:annotation>
+      <xs:documentation>This is a Radiator object. It represents a hot water radiator installed in a Space.</xs:documentation>
+    </xs:annotation>
+    <xs:choice minOccurs="0" maxOccurs="unbounded">
+      <xs:element name ="RadiatorValve" type="refit:RadiatorValve"></xs:element>
+      <xs:element name ="Sensor" type="refit:Sensor"></xs:element>
+      <xs:element name ="TimeSeriesVariable" type="refit:TimeSeriesVariable"></xs:element>
+    </xs:choice>
+    <xs:attributeGroup ref="refit:genericObjectAttributes"></xs:attributeGroup>
+    <xs:attribute name="radiatorType" type="refit:radiatorType">
+      <xs:annotation>
+        <xs:documentation>The 'radiatorType' attribute gives the type of radiator, chosen from a list.</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="length" type="xs:double">
+      <xs:annotation>
+        <xs:documentation>The 'length' attribute is the length (or width) of the radiator, in metres.</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="height" type="xs:double">
+      <xs:annotation>
+        <xs:documentation>The 'height' attribute is the height of the radiator, in metres.</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="ratedPower" type="xs:double">
+      <xs:annotation>
+        <xs:documentation>The 'ratedPower' attribute gives the rated power of the radiator, in W.</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="spaceIdRef" type="xs:string">
+      <xs:annotation>
+        <xs:documentation>The 'spaceIdRef' attribute is a reference a Space object, using the 'id' attribute of the Space object.</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+  </xs:complexType>
+
+  <xs:complexType name="RadiatorValve">
+    <xs:annotation>
+      <xs:documentation>This is a RadiatorValve object. It represents a value installed on a Radiator.</xs:documentation>
+    </xs:annotation>
+    <xs:choice minOccurs="0" maxOccurs="unbounded">
+      <xs:element name ="Sensor" type="refit:Sensor"></xs:element>
+      <xs:element name ="TimeSeriesVariable" type="refit:TimeSeriesVariable"></xs:element>
+    </xs:choice>
+    <xs:attributeGroup ref="refit:genericObjectAttributes"></xs:attributeGroup>
+    <xs:attribute name="radiatorValveType" type="refit:radiatorValveType">
+      <xs:annotation>
+        <xs:documentation>The 'radiatorValveType' attribute is the type of radiator valve, chosen from a list.</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="manufacturer" type="xs:string">
+      <xs:annotation>
+        <xs:documentation>The 'manufacturer' attribute is the manufacturer of the radiator valve.</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="model" type="xs:string">
+      <xs:annotation>
+        <xs:documentation>The 'model' attribute is the model of the radiator valve.</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+  </xs:complexType>
+
+  <xs:complexType name="RoomThermostat">
+    <xs:annotation>
+      <xs:documentation>This is a RoomThermostat object.</xs:documentation>
+    </xs:annotation>
+    <xs:choice minOccurs="0" maxOccurs="unbounded">
+      <xs:element name ="Sensor" type="refit:Sensor"></xs:element>
+      <xs:element name ="TimeSeriesVariable" type="refit:TimeSeriesVariable"></xs:element>
+    </xs:choice>
+    <xs:attributeGroup ref="refit:genericObjectAttributes"></xs:attributeGroup>
+    <xs:attribute name="roomThermostatType" type="refit:roomThermostatType">
+      <xs:annotation>
+        <xs:documentation>The 'roomThermostatType' attribute is the type of room thermostat, chosen from a list.</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="roomThermostatScheduleTypeIdRef" type="xs:string">
+      <xs:annotation>
+        <xs:documentation>The 'roomThermostatScheduleTypeIdRef' attribute is a reference a ScheduleType, using the 'id' attribute of the ScheduleType object. This gives the schedule of the room thermostat set point temperature, in degrees C.</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="manufacturer" type="xs:string">
+      <xs:annotation>
+        <xs:documentation>The 'manufacturer' attribute is the manufacturer of the room thermostat.</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="model" type="xs:string">
+      <xs:annotation>
+        <xs:documentation>The 'model' attribute is the model of the room thermostat.</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="spaceIdRef" type="xs:string">
+      <xs:annotation>
+        <xs:documentation>The 'spaceIdRef' attribute is a reference a Space object, using the 'id' attribute of the Space object.</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+  </xs:complexType>
+  
+   <!--SURFACES AND OPENING-->
+  
+  <xs:complexType name="Surface">
+    <xs:annotation>
+      <xs:documentation>This is a Surface object. It represents a surface (e.g. wall, roof, floor) in a Building.</xs:documentation>
+    </xs:annotation>
+    <xs:choice minOccurs="0" maxOccurs="unbounded">
+      <xs:element name ="CartesianPoint" type="refit:CartesianPoint"></xs:element>
+      <xs:element name ="Opening" type="refit:Opening"></xs:element>
+      <xs:element name ="Sensor" type="refit:Sensor"></xs:element>
+      <xs:element name ="TimeSeriesVariable" type="refit:TimeSeriesVariable"></xs:element>
+    </xs:choice>
+    <xs:attributeGroup ref="refit:genericObjectAttributes"></xs:attributeGroup>
+    <xs:attribute name="surfaceType" type="refit:surfaceType">
+      <xs:annotation>
+        <xs:documentation>The 'surfaceType' attribute is the type of surface, chosen from a list.</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="constructionTypeIdRef" type="xs:string">
+      <xs:annotation>
+        <xs:documentation>The 'constructionIdRef' attribute is a reference a ConstructionType type, using the 'id' attribute of the ConstructionType object. This gives the construction of the Surface.</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="innerSpaceIdRef" type="xs:string">
+      <xs:annotation>
+        <xs:documentation>The 'innerSpaceIdRef' attribute is a reference a Space object, using the 'id' attribute of the Space object. This gives the Space adjacent to the inner side of the Surface.</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="outerSpaceIdRef" type="xs:string">
+      <xs:annotation>
+        <xs:documentation>The 'outerSpaceIdRef' attribute is a reference a Space object, using the 'id' attribute of the Space object. This gives the Space adjacent to the outer side of the Surface. If the outer surface is external air or ground, then this attribute is not needed.</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="azimuth" type="xs:double">
+      <xs:annotation>
+        <xs:documentation>The 'azimuth' attribute is the orientation angle of the Surface based on the y-axis of the local coordinate system, in degrees.</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="tilt" type="xs:double">
+      <xs:annotation>
+        <xs:documentation>The 'tilt' attribute is the tilt angle of the Surface from the horizontal, in degrees.</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="area" type="xs:double">
+      <xs:annotation>
+        <xs:documentation>The 'area' attribute is the area of the Surface, in m2. The area does not include the area of any openings in the Surface.</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+  </xs:complexType>
+
+  <xs:complexType name="Opening">
+    <xs:annotation>
+      <xs:documentation>This is an Opening object. It represents an opening (e.g. window, door) in a Surface.</xs:documentation>
+    </xs:annotation>
+    <xs:choice minOccurs="0" maxOccurs="unbounded">
+      <xs:element name ="CartesianPoint" type="refit:CartesianPoint"></xs:element>
+      <xs:element name ="Sensor" type="refit:Sensor"></xs:element>
+      <xs:element name ="TimeSeriesVariable" type="refit:TimeSeriesVariable"></xs:element>
+    </xs:choice>
+    <xs:attributeGroup ref="refit:genericObjectAttributes"></xs:attributeGroup>
+    <xs:attribute name="openingType" type="xs:string">
+      <xs:annotation>
+        <xs:documentation>The 'openingType' attribute gives the type of opening (e.g. window, door), chosen from a list.</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="constructionTypeIdRef" type="xs:string">
+      <xs:annotation>
+        <xs:documentation>The 'constructionIdRef' attribute is a reference a ConstructionType type, using the 'id' attribute of the ConstructionType type. This gives the construction of the Opening.</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="windowConstructionTypeIdRef" type="xs:string">
+      <xs:annotation>
+        <xs:documentation>The 'windowConstructionTypeIdRef' attribute is a reference a WindowConstructionType type, using the 'id' attribute of the WindowConstructionType type. This gives the window construction of the Opening.</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="area" type="xs:double">
+      <xs:annotation>
+        <xs:documentation>The 'area' attribute is the area of the Opening, in m2.</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+  </xs:complexType>
+
+  <xs:complexType name="CartesianPoint">
+    <xs:annotation>
+      <xs:documentation>This is an CartesianPoint object. It represents a single point according to the local coordinate system.</xs:documentation>
+    </xs:annotation>
+    <xs:attribute name="X" type="xs:double">
+      <xs:annotation>
+        <xs:documentation>The 'X' attribute is the location of the point on the x-axis.</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="Y" type="xs:double">
+      <xs:annotation>
+        <xs:documentation>The 'Y' attribute is the location of the point on the y-axis.</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="Z" type="xs:double">
+      <xs:annotation>
+        <xs:documentation>The 'Z' attribute is the location of the point on the z-axis.</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+  </xs:complexType>
+  
+  <!--CONSTRUCTIONS-->
+  
+  <xs:complexType name="ConstructionType">
+    <xs:annotation>
+      <xs:documentation>This is a ConstructionType type. It represents a type of construction found in a Building.</xs:documentation>
+    </xs:annotation>
+    <xs:choice minOccurs="0" maxOccurs="unbounded">
+      <xs:element name ="ConstructionType_layer" type="refit:ConstructionType_layer"></xs:element>
+    </xs:choice>
+    <xs:attributeGroup ref="refit:genericTypeAttributes"></xs:attributeGroup>
+    <xs:attribute name="u-value" type="xs:double">
+      <xs:annotation>
+        <xs:documentation>The 'u-value' attribute is the U-value of the building construction in W/m2K.</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+  </xs:complexType>
+
+  <xs:complexType name="ConstructionType_layer">
+    <xs:annotation>
+      <xs:documentation>This is a ConstructionType_layer object. ConstructionType_layers represent the layers in a ConstructionType type. Several ConstructionType_layer objects can be specified, representing the construction layers from outside to inside or from the second space to the first space.</xs:documentation>
+    </xs:annotation>
+    <xs:attribute name="materialTypeIdRef" type="xs:string">
+      <xs:annotation>
+        <xs:documentation>The 'materialTypeIdRef' attribute gives a reference to the 'id' attribute of a Building_materialType type.</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="thickness" type="xs:double">
+      <xs:annotation>
+        <xs:documentation>The 'thickness' attribute is the thickness of the material in the layer, in metres.</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+  </xs:complexType>
+
+  <xs:complexType name="MaterialType">
+    <xs:annotation>
+      <xs:documentation>This is a MaterialType type. It represents a type of material found in a Building.</xs:documentation>
+    </xs:annotation>
+    <xs:attributeGroup ref="refit:genericTypeAttributes"></xs:attributeGroup>
+    <xs:attribute name="conductivity" type="xs:double">
+      <xs:annotation>
+        <xs:documentation>The 'conductivity' attribute is the thermal conductivity of the material, in W/K.</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="density" type="xs:double">
+      <xs:annotation>
+        <xs:documentation>The 'density' attribute is the density of the material, in kg/m3.</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="specificHeatCapacity" type="xs:double">
+      <xs:annotation>
+        <xs:documentation>The 'specificHeatCapacity' attribute is the specificHeatCapacity of the material, in J/kgK.</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+  </xs:complexType>
+
+  <xs:complexType name="WindowConstructionType">
+    <xs:annotation>
+      <xs:documentation>This is a WindowConstructionType type. It represents a type of window construction found in a Building.</xs:documentation>
+    </xs:annotation>
+    <xs:attributeGroup ref="refit:genericObjectAttributes"></xs:attributeGroup>
+    <xs:attribute name="u-value" type="xs:double">
+      <xs:annotation>
+        <xs:documentation>The 'u-value' attribute is the U-value of the window construction in W/m2K.</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="solarHeatGainCoefficient" type="xs:double">
+      <xs:annotation>
+        <xs:documentation>The 'solarHeatGainCoefficient' attribute is the solar heat gain coefficient of the window construction.</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="transmittance" type="xs:double">
+      <xs:annotation>
+        <xs:documentation>The 'transmittance' attribute is the transmittance of the window construction.</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+  </xs:complexType>
+
+  <!--SCHEDULES-->
+  
+  <xs:complexType name="ScheduleType">
+    <xs:annotation>
+      <xs:documentation>This is a ScheduleType type. It represents a type of schedule used in a Building.</xs:documentation>
+    </xs:annotation>
+    <xs:choice minOccurs="0" maxOccurs="unbounded">
+      <xs:element name ="ScheduleType_weekSchedule" type="refit:ScheduleType_weekSchedule"></xs:element>
+    </xs:choice>
+    <xs:attributeGroup ref="refit:genericObjectAttributes"></xs:attributeGroup>
+  </xs:complexType>
+
+  <xs:complexType name="ScheduleType_weekSchedule">
+    <xs:annotation>
+      <xs:documentation>This is a ScheduleType_weekSchedule object. It represents the WeekScheduleType types used by a ScheduleType.</xs:documentation>
+    </xs:annotation>
+    <xs:attributeGroup ref="refit:genericObjectAttributes"></xs:attributeGroup>
+    <xs:attribute name="weekScheduleTypeIdRef" type="xs:string">
+      <xs:annotation>
+        <xs:documentation>The 'weekScheduleTypeIdRef' attribute gives a reference to the 'id' attribute of a WeekScheduleType type.</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="beginDate" type="xs:dateTime">
+      <xs:annotation>
+        <xs:documentation>The 'beginDate' attribute gives the start date and time when a WeekScheduleType first occurs in a ScheduleType.</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="endDate" type="xs:dateTime">
+      <xs:annotation>
+        <xs:documentation>The 'endDate' attribute gives the start date and time when a WeekScheduleType last occurs in a ScheduleType.</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+  </xs:complexType>
+
+  <xs:complexType name="WeekScheduleType">
+    <xs:annotation>
+      <xs:documentation>This is a WeekScheduleType type. It represents a type of weekly schedule used in a Building.</xs:documentation>
+    </xs:annotation>
+    <xs:choice minOccurs="0" maxOccurs="unbounded">
+      <xs:element name ="WeekScheduleType_day" type="refit:WeekScheduleType_day"></xs:element>
+    </xs:choice>
+    <xs:attributeGroup ref="refit:genericTypeAttributes"></xs:attributeGroup>
+  </xs:complexType>
+
+  <xs:complexType name="WeekScheduleType_day">
+    <xs:annotation>
+      <xs:documentation>This is a WeekScheduleType_day object. It represents the DayScheduleTypes used by a WeekScheduleType type.</xs:documentation>
+    </xs:annotation>
+    <xs:attributeGroup ref="refit:genericTypeAttributes"></xs:attributeGroup>
+    <xs:attribute name="dayType" type="refit:dayType">
+      <xs:annotation>
+        <xs:documentation>The 'dayType' attribute gives the type of day to which the DayScheduleType applied, chosen from a list.</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="dayScheduleTypeIdRef" type="xs:string">
+      <xs:annotation>
+        <xs:documentation>The 'dayScheduleTypeIdRef' attribute gives a reference to the 'id' attribute of a DayScheduleType type.</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+  </xs:complexType>
+
+  <xs:complexType name="DayScheduleType">
+    <xs:annotation>
+      <xs:documentation>This is a DayScheduleType type. It represents a type fo day schedule used in a Building.</xs:documentation>
+    </xs:annotation>
+    <xs:choice minOccurs="0" maxOccurs="unbounded">
+      <xs:element name ="DayScheduleType_Value" type="refit:DayScheduleType_Value"></xs:element>
+    </xs:choice>
+    <xs:attributeGroup ref="refit:genericTypeAttributes"></xs:attributeGroup>
+  </xs:complexType>
+
+  <xs:complexType name="DayScheduleType_Value">
+    <xs:annotation>
+      <xs:documentation>This is a DayScheduleType_Value object. It represents the values used by a DayScheduleType type.</xs:documentation>
+    </xs:annotation>
+    <xs:attributeGroup ref="refit:genericTypeAttributes"></xs:attributeGroup>
+    <xs:attribute name="scheduleValue" type="xs:double">
+      <xs:annotation>
+        <xs:documentation>The 'scheduleValue' attribute is the value of the schedule. This could be an absolute number (i.e. a temerature setpoint), a fraction (i.e. proportion of window opening) or any other option.</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="beginTime" type="xs:dateTime">
+      <xs:annotation>
+        <xs:documentation>The 'beginTime' attribute gives the time when the scheduleValue starts in a DayScheduleType.</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="endTime" type="xs:dateTime">
+      <xs:annotation>
+        <xs:documentation>The 'endTime' attribute gives the time when the scheduleValue ends in a DayScheduleType.</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+  </xs:complexType>
+
+  <!--SENSORS AND TIME SERIES VARIABLES-->
+  
+  <xs:complexType name="Sensor">
+    <xs:annotation>
+      <xs:documentation>This is a Sensor object. Sensors represent devices which are placed inside or outside buildings and record time series measurements. </xs:documentation>
+    </xs:annotation>
+    <xs:choice minOccurs="0" maxOccurs="unbounded">
+      <xs:element name ="TimeSeriesVariable" type="refit:TimeSeriesVariable"></xs:element>
+    </xs:choice>
+    <xs:attributeGroup ref="refit:genericObjectAttributes"></xs:attributeGroup>
+    <xs:attribute name="manufacturer" type="xs:string">
+      <xs:annotation>
+        <xs:documentation>The 'manufacturer' attribute is the manufacturer of the sensor.</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="model" type="xs:string">
+      <xs:annotation>
+        <xs:documentation>The 'model' attribute is the model of the sensor.</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+  </xs:complexType>
+
+  <xs:complexType name="TimeSeriesVariable">
+    <xs:annotation>
+      <xs:documentation>This is a TimeSeriesVariable object. TimeSeriesVariables represent a variable which is measured over time.</xs:documentation>
+    </xs:annotation>
+    <xs:choice minOccurs="0" maxOccurs="unbounded">
+      <xs:element name="TimeSeriesValue" type="refit:TimeSeriesValue"></xs:element>
+    </xs:choice>
+    <xs:attributeGroup ref="refit:genericObjectAttributes"></xs:attributeGroup>
+    <xs:attribute name="variableType" type="xs:string">
+      <xs:annotation>
+        <xs:documentation>The 'variableType' attribute gives the type of variable (i.e. air temperature, electric power, light levels).</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="units" type="xs:string">
+      <xs:annotation>
+        <xs:documentation>The 'units' attribute gives the units of the TimeSeriesVariable (i.e. W, degC).</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="intervalType" type="refit:intervalType">
+      <xs:annotation>
+        <xs:documentation>The 'intervalType' attribute gives the type of interval between timestamps, either 'FixedInterval' or 'VariableInterval'.</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="intervalUnit" type="refit:intervalUnit">
+      <xs:annotation>
+        <xs:documentation>The 'intervalUnit' attribute gives the time unit used to specify the interval between timestamps, either 'Year', 'Month', 'Day', 'Hour', 'Minute' or 'Second'.</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="intervalLength" type="xs:integer">
+      <xs:annotation>
+        <xs:documentation>The 'intervalLength' attribute gives the number of 'intervalUnits' between timestamps.</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="hasMissingData" type="refit:YesNoList">
+      <xs:annotation>
+        <xs:documentation>The 'hasMissingData' attribute is 'Yes' if there is missing data (such as gaps in fixed timestamps), otherwise 'No'.</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="repeatsOmitted" type="refit:YesNoList">
+      <xs:annotation>
+        <xs:documentation>The 'repeatsOmitted' attribute is 'Yes' if repeating values are omitted (i.e. if the next timestep data value is the same as the previous then it is omitted), otherwise 'No'.</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="hasDuplicateTimestamps" type="refit:YesNoList">
+      <xs:annotation>
+        <xs:documentation>The 'hasDuplicateTimestamps' attribute is 'Yes' if there are duplicate timestamps in the data (which may contain different data values), otherwise 'No'.</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+  </xs:complexType>
+
+  <xs:complexType name="TimeSeriesValue">
+    <xs:annotation>
+      <xs:documentation>This is a TimeSeriesValue object. It represents a value of a TimeSeriesVariable at a single point in time.</xs:documentation>
+    </xs:annotation>
+    <xs:attribute name="dateTime" type="xs:dateTime">
+      <xs:annotation>
+        <xs:documentation>The 'dateTime' attribute is the date and time of the TimeSeriesValue.</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="data" type="xs:double">
+      <xs:annotation>
+        <xs:documentation>
+          The 'data' attribute is the data value of the TimeSeriesValue. A series of codes are used to represent non-numeric occurences:
+          "Online" is given as -10001
+          "Offline" is given as -10002
+          "Motion detected" is given as -10003
+          "Active" is given as -10004
+          "ALARM!" is given as -10005
+          "" is given as -10006
+          "On" is given as -10007
+          "Off" is given as -10008
+          "Open" is given as -10009
+          "Closed" is given as -10010
+          "Operational" is given as -10011
+        </xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+  </xs:complexType>
+  
+  <!--ATTRIBUTE GROUPS-->
+  
+  <xs:attributeGroup name="genericObjectAttributes">
+    <xs:annotation>
+      <xs:documentation>This attribute group gives the set of attributes which are used for most of the Objects specified in this schema.</xs:documentation>
+    </xs:annotation>
+    <xs:attribute name="id" type="xs:string">
+      <xs:annotation>
+        <xs:documentation>The 'id' attribute gives a unique identifier for the object. This should be a unique string for all child Objects of a parent Object, i.e. all Building objects which are children of a Stock object should have their own unique 'id' attribute. Two or more objects with indentical 'id' attributes may occur if the same object has been changed/updated over time.</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="objectName" type="xs:string">
+      <xs:annotation>
+        <xs:documentation>The 'objectName' attribute is a descriptive name for the object. It does not need to be unique.</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="comments" type="xs:string">
+      <xs:annotation>
+        <xs:documentation>The 'comments' attribute is for any additional comments about the object.</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="startDateTime" type="xs:dateTime">
+      <xs:annotation>
+        <xs:documentation>The 'startDateTime' attribute represents the date and time when the object first exists in the context of the study. For example, this could be when a building is first surveyed or when a sensor is first placed.</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="endDateTime" type="xs:dateTime">
+      <xs:annotation>
+        <xs:documentation>The 'endDateTime' attribute represents the date and time when the object ceases to exist in the context of the study. For example, this could be the end of the study period, when a sensor is removed from a building or when an appliance is replaced. If this attribute is missing, it is assumed that the object remained in place until the endo fo the study period.</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="source" type="xs:string">
+      <xs:annotation>
+        <xs:documentation>The 'source' attribute represents the source for the information stored in the object. This could be a reference to previous work, a report or a website.</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+  </xs:attributeGroup>
+
+  <xs:attributeGroup name="genericTypeAttributes">
+    <xs:annotation>
+      <xs:documentation>This attribute group gives the set of attributes which are used for most of the Types specified in this schema.</xs:documentation>
+    </xs:annotation>
+    <xs:attribute name="id" type="xs:string">
+      <xs:annotation>
+        <xs:documentation>The 'id' attribute gives a unique identifier for the type. This should be a unique string for all child Types of a parent Object</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="typeName" type="xs:string">
+      <xs:annotation>
+        <xs:documentation>The 'typeName' attribute is a descriptive name for the type. It does not need to be unique.</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="comments" type="xs:string">
+      <xs:annotation>
+        <xs:documentation>The 'comments' attribute is for any additional comments about the object.</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="source" type="xs:string">
+      <xs:annotation>
+        <xs:documentation>The 'source' attribute represents the source for the information stored in the object. This could be a reference to previous work, a report or a website.</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+  </xs:attributeGroup>
+  
+  <!--SIMPLE TYPES-->
+
+  <xs:simpleType name="applianceType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Air filter"/>
+      <xs:enumeration value="Alarm clock"/>
+      <xs:enumeration value="Alarm radio"/>
+      <xs:enumeration value="Aquarium"/>
+      <xs:enumeration value="Baby monitor"/>
+      <xs:enumeration value="Bread maker"/>
+      <xs:enumeration value="CD player"/>
+      <xs:enumeration value="Chiller"/>
+      <xs:enumeration value="Clock"/>
+      <xs:enumeration value="Coffee grinder"/>
+      <xs:enumeration value="Coffee maker"/>
+      <xs:enumeration value="DAB radio"/>
+      <xs:enumeration value="Dehumidifier/heater"/>
+      <xs:enumeration value="Desktop PC"/>
+      <xs:enumeration value="Dishwasher"/>
+      <xs:enumeration value="Docking station"/>
+      <xs:enumeration value="Doorbuster"/>
+      <xs:enumeration value="DVD player/recorder"/>
+      <xs:enumeration value="Electric blanket"/>
+      <xs:enumeration value="Electric heater"/>
+      <xs:enumeration value="Electric hob"/>
+      <xs:enumeration value="Electric toothbrush charger"/>
+      <xs:enumeration value="Exercise machine"/>
+      <xs:enumeration value="Fairy lights"/>
+      <xs:enumeration value="Fan"/>
+      <xs:enumeration value="Fire alarm"/>
+      <xs:enumeration value="Food processor"/>
+      <xs:enumeration value="Freezer"/>
+      <xs:enumeration value="Fridge"/>
+      <xs:enumeration value="Fridge freezer"/>
+      <xs:enumeration value="Games console"/>
+      <xs:enumeration value="George Forman grill"/>
+      <xs:enumeration value="Guitar amplifier"/>
+      <xs:enumeration value="Hair dryer"/>
+      <xs:enumeration value="Hair straightner"/>
+      <xs:enumeration value="Hair tongs"/>
+      <xs:enumeration value="HiFi"/>
+      <xs:enumeration value="Hub (network)"/>
+      <xs:enumeration value="Interlocker"/>
+      <xs:enumeration value="iPad docking station"/>
+      <xs:enumeration value="iPod docking station"/>
+      <xs:enumeration value="Iron"/>
+      <xs:enumeration value="Juicer"/>
+      <xs:enumeration value="Kettle"/>
+      <xs:enumeration value="Keyboard"/>
+      <xs:enumeration value="Kitchenette"/>
+      <xs:enumeration value="Lamp"/>
+      <xs:enumeration value="Laptop"/>
+      <xs:enumeration value="Lava lamp"/>
+      <xs:enumeration value="Microwave"/>
+      <xs:enumeration value="Oven"/>
+      <xs:enumeration value="Oven fan"/>
+      <xs:enumeration value="PC monitor"/>
+      <xs:enumeration value="PC speakers"/>
+      <xs:enumeration value="Phone charger"/>
+      <xs:enumeration value="Printer"/>
+      <xs:enumeration value="Projector"/>
+      <xs:enumeration value="Radio"/>
+      <xs:enumeration value="Raspberry Pi"/>
+      <xs:enumeration value="Record player"/>
+      <xs:enumeration value="Router"/>
+      <xs:enumeration value="Scanner"/>
+      <xs:enumeration value="Set top box"/>
+      <xs:enumeration value="Sewing machine"/>
+      <xs:enumeration value="Shredder"/>
+      <xs:enumeration value="Slow cooker"/>
+      <xs:enumeration value="Speakers"/>
+      <xs:enumeration value="Tape player"/>
+      <xs:enumeration value="Telephone"/>
+      <xs:enumeration value="Television"/>
+      <xs:enumeration value="Toaster"/>
+      <xs:enumeration value="Tumble dryer"/>
+      <xs:enumeration value="Video player"/>
+      <xs:enumeration value="Vivarium"/>
+      <xs:enumeration value="Washer dryer"/>
+      <xs:enumeration value="Washing machine"/>
+    </xs:restriction>
+  </xs:simpleType>
+  
+  <xs:simpleType name="intervalType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="FixedInterval"/>
+      <xs:enumeration value="VariableInterval"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="intervalUnit">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Year"/>
+      <xs:enumeration value="Month"/>
+      <xs:enumeration value="Day"/>
+      <xs:enumeration value="Hour"/>
+      <xs:enumeration value="Minute"/>
+      <xs:enumeration value="Second"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="YesNoList">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Yes"/>
+      <xs:enumeration value="No"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="occupancyType">
+    <xs:annotation>
+      <xs:documentation>Source: English Housing Survey 2011/12</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Single family dwelling"/>
+      <xs:enumeration value="Shared house"/>
+      <xs:enumeration value="Household with lodgers"/>
+      <xs:enumeration value="Bedsit or flat"/>
+      <xs:enumeration value="Purpose built with shared amenities"/>
+      <xs:enumeration value="Hostel or B and B"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="builtFormType">
+    <xs:annotation>
+      <xs:documentation>Source: English Housing Survey 2011/12</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="End terrace house or bungalow"/>
+      <xs:enumeration value="Mid terrace house or bungalow"/>
+      <xs:enumeration value="Semi detached house or bungalow"/>
+      <xs:enumeration value="Detached house or bungalow"/>
+      <xs:enumeration value="Temporary  house or bungalow"/>
+      <xs:enumeration value="Purpose built flat"/>
+      <xs:enumeration value="Converted flat"/>
+      <xs:enumeration value="Non-residential plus flat"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="wallAgeBand">
+    <xs:annotation>
+      <xs:documentation>Source: English Housing Survey 2011/12</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Pre 1850"/>
+      <xs:enumeration value="1850 - 1899"/>
+      <xs:enumeration value="1900 - 1919"/>
+      <xs:enumeration value="1919 - 1944"/>
+      <xs:enumeration value="1945 - 1964"/>
+      <xs:enumeration value="1965 - 1974"/>
+      <xs:enumeration value="1975 - 1980"/>
+      <xs:enumeration value="1981 - 1990"/>
+      <xs:enumeration value="1991 - 1995"/>
+      <xs:enumeration value="1996 - 2002"/>
+      <xs:enumeration value="Post 2002"/>
+      <xs:enumeration value="Unknown"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="conditionType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Heated"/>
+      <xs:enumeration value="Cooled"/>
+      <xs:enumeration value="Heated and cooled"/>
+      <xs:enumeration value="Not conditioned"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="roomType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Bathroom"/>
+      <xs:enumeration value="Bedroom"/>
+      <xs:enumeration value="Boiler"/>
+      <xs:enumeration value="Chimney"/>
+      <xs:enumeration value="Cloakroom"/>
+      <xs:enumeration value="Conservatory"/>
+      <xs:enumeration value="Corridor"/>
+      <xs:enumeration value="Cupboard"/>
+      <xs:enumeration value="Dining room"/>
+      <xs:enumeration value="Ensuite"/>
+      <xs:enumeration value="Garage"/>
+      <xs:enumeration value="Gym"/>
+      <xs:enumeration value="Hallway"/>
+      <xs:enumeration value="Hot water tank"/>
+      <xs:enumeration value="Kitchen"/>
+      <xs:enumeration value="Landing"/>
+      <xs:enumeration value="Living room"/>
+      <xs:enumeration value="Loft"/>
+      <xs:enumeration value="Playroom"/>
+      <xs:enumeration value="Porch"/>
+      <xs:enumeration value="Sitting space"/>
+      <xs:enumeration value="Stairs"/>
+      <xs:enumeration value="Storage room"/>
+      <xs:enumeration value="Study"/>
+      <xs:enumeration value="Utility room"/>
+      <xs:enumeration value="Wall"/>
+      <xs:enumeration value="Wardrobe"/>
+      <xs:enumeration value="WC"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="wallType">
+    <xs:annotation>
+      <xs:documentation>Source: English Housing Survey 2011/12</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Masonry-Boxwall -Solid"/>
+      <xs:enumeration value="Masonry-Boxwall-Cavity"/>
+      <xs:enumeration value="Masonry-Crosswall-"/>
+      <xs:enumeration value="Concrete-Boxwall-In-situ"/>
+      <xs:enumeration value="Concrete-Boxwall-Precast panel less than 1m wide="/>
+      <xs:enumeration value="Concrete-Boxwall-Precast panel greater than 1m wide"/>
+      <xs:enumeration value="Concrete-Crosswall-In-situ"/>
+      <xs:enumeration value="Concrete-Crosswall-Precast panel"/>
+      <xs:enumeration value="Concrete-Frame-In-situ"/>
+      <xs:enumeration value="Concrete-Frame-Precast panel"/>
+      <xs:enumeration value="Timbre-Frame-Pre 1919"/>
+      <xs:enumeration value="Timbre-Frame-Post 1919"/>
+      <xs:enumeration value="Metal-Frame"/>
+      <xs:enumeration value="Other"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="windowType">
+    <xs:annotation>
+      <xs:documentation>Source: English Housing Survey 2011/12</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Single glazed - Wood casement"/>
+      <xs:enumeration value="Single glazed - Wood sash"/>
+      <xs:enumeration value="Single glazed - UPVC"/>
+      <xs:enumeration value="Single glazed - Metal"/>
+      <xs:enumeration value="Double glazed - Wood"/>
+      <xs:enumeration value="Double glazed - UPVC"/>
+      <xs:enumeration value="Double glazed - Metal"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="fuelType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Gas"/>
+      <xs:enumeration value="Electricity"/>
+      <xs:enumeration value="Oil"/>
+      <xs:enumeration value="Coal"/>
+      <xs:enumeration value="Smokeless fuel"/>
+      <xs:enumeration value="Wood"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="meterType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Gas"/>
+      <xs:enumeration value="Electric"/>
+      <xs:enumeration value="Water"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="waterOutletType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Shower"/>
+      <xs:enumeration value="Tap"/>
+    </xs:restriction>
+  </xs:simpleType>
+  
+  <xs:simpleType name="waterHeatingType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Direct gas"/>
+      <xs:enumeration value="Direct electric"/>
+      <xs:enumeration value="Domestic hot water"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="loftType">
+    <xs:annotation>
+      <xs:documentation>Source: English Housing Survey 2011/12</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Fully boarded"/>
+      <xs:enumeration value="No boarding or partial boarding"/>
+      <xs:enumeration value="Rooms with permanent stairs"/>
+      <xs:enumeration value="No loft"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="loftInsulationType">
+    <xs:annotation>
+      <xs:documentation>Source: English Housing Survey 2011/12</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Mineral wool/fibre glass"/>
+      <xs:enumeration value="Vermiculite beads"/>
+      <xs:enumeration value="High performance quilt"/>
+      <xs:enumeration value="Rigid board foam"/>
+      <xs:enumeration value="None"/>
+      <xs:enumeration value="Unknown"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="loftInsulationThickness">
+    <xs:annotation>
+      <xs:documentation>Source: English Housing Survey 2011/12</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="25mm"/>
+      <xs:enumeration value="50mm"/>
+      <xs:enumeration value="75mm"/>
+      <xs:enumeration value="100mm"/>
+      <xs:enumeration value="125mm"/>
+      <xs:enumeration value="150mm"/>
+      <xs:enumeration value="200mm"/>
+      <xs:enumeration value="250mm"/>
+      <xs:enumeration value="300mm"/>
+      <xs:enumeration value=">300mm"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="sex">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Male"/>
+      <xs:enumeration value="Female"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="employmentStatus">
+    <xs:annotation>
+      <xs:documentation>Source: English Housing Survey 2011/12</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="In full-time paid employment"/>
+      <xs:enumeration value="In part-time paid employment"/>
+      <xs:enumeration value="Doing voluntary or other unpaid work"/>
+      <xs:enumeration value="Temporarily off sick from regular job"/>
+      <xs:enumeration value="On long-term sick leave from regular job"/>
+      <xs:enumeration value="On maternity/paternity leave from regular job"/>
+      <xs:enumeration value="Taking a break from regular job, but with a definite intention of returning"/>
+      <xs:enumeration value="Waiting to take up a new job for which you have (she/he has) been appointed"/>
+      <xs:enumeration value="On a government scheme for employment training"/>
+      <xs:enumeration value="Unemployed and actively seeking work"/>
+      <xs:enumeration value="Unemployed and not seeking work"/>
+      <xs:enumeration value="Looking after the family/home"/>
+      <xs:enumeration value="Retired from paid work"/>
+      <xs:enumeration value="Permanently unable to work because of disability"/>
+      <xs:enumeration value="Student at school"/>
+      <xs:enumeration value="Student at college or university"/>
+      <xs:enumeration value="Other"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="boilerType">
+    <xs:annotation>
+      <xs:documentation>Source: English Housing Survey 2011/12</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Standard (non condensing)"/>
+      <xs:enumeration value="Back boiler"/>
+      <xs:enumeration value="Combination (non condensing)"/>
+      <xs:enumeration value="Condensing"/>
+      <xs:enumeration value="Condensing combi"/>
+      <xs:enumeration value="Unknown"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="fixedHeaterType">
+    <xs:annotation>
+      <xs:documentation>Adapted from: English Housing Survey 2011/12</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Main gas fire"/>
+      <xs:enumeration value="Electric fire"/>
+      <xs:enumeration value="Electric heaters - panel convector or radiator"/>
+      <xs:enumeration value="Individual storage heater"/>
+      <xs:enumeration value="Solid fuel - open fire/stove"/>
+      <xs:enumeration value="Underfloor heating"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="cylinderSize">
+    <xs:annotation>
+      <xs:documentation>Source: English Housing Survey 2011/12</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="450 x 900mm"/>
+      <xs:enumeration value="450 x 1050mm"/>
+      <xs:enumeration value="450 x 1650mm"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="cylinderInsulationType">
+    <xs:annotation>
+      <xs:documentation>Source: English Housing Survey 2011/12</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Foam factory packed"/>
+      <xs:enumeration value="Jacket loose"/>
+      <xs:enumeration value="Other"/>
+      <xs:enumeration value="None"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="cylinderInsulationThickness">
+    <xs:annotation>
+      <xs:documentation>Source: English Housing Survey 2011/12</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="12.5mm"/>
+      <xs:enumeration value="25mm"/>
+      <xs:enumeration value="38mm"/>
+      <xs:enumeration value="50mm"/>
+      <xs:enumeration value="80mm"/>
+      <xs:enumeration value="100mm"/>
+      <xs:enumeration value="150mm"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="lightBulbType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Incandescent"/>
+      <xs:enumeration value="CFL"/>
+      <xs:enumeration value="LED"/>
+      <xs:enumeration value="Halogen"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="radiatorType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Single panel radiator"/>
+      <xs:enumeration value="Double panel radiator"/>
+      <xs:enumeration value="Single panel convector radiator"/>
+      <xs:enumeration value="Double panel convector radiator"/>
+      <xs:enumeration value="Double panel double convector radiator"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="radiatorValveType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Manual"/>
+      <xs:enumeration value="Manual thermostatic radiator valve"/>
+      <xs:enumeration value="Programmable wireless thermostatic radiator valve"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="roomThermostatType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Manual"/>
+      <xs:enumeration value="Smart"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="surfaceType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="External wall"/>
+      <xs:enumeration value="External roof"/>
+      <xs:enumeration value="External floor"/>
+      <xs:enumeration value="Internal wall"/>
+      <xs:enumeration value="Internal ceiling"/>
+      <xs:enumeration value="Internal floor"/>
+      <xs:enumeration value="Basement wall"/>
+      <xs:enumeration value="Basement floor"/>
+      <xs:enumeration value="Basement ceiling"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="openingType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Window"/>
+      <xs:enumeration value="Door"/>
+      <xs:enumeration value="Air"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="dayType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Monday"/>
+      <xs:enumeration value="Tuesday"/>
+      <xs:enumeration value="Wednesday"/>
+      <xs:enumeration value="Thursday"/>
+      <xs:enumeration value="Friday"/>
+      <xs:enumeration value="Saturday"/>
+      <xs:enumeration value="Sunday"/>
+      <xs:enumeration value="Weekdays"/>
+      <xs:enumeration value="Weekends"/>
+      <xs:enumeration value="All days"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="ageBand">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="0-15"/>
+      <xs:enumeration value="16-24"/>
+      <xs:enumeration value="25-34"/>
+      <xs:enumeration value="35-44"/>
+      <xs:enumeration value="45-54"/>
+      <xs:enumeration value="55-64"/>
+      <xs:enumeration value="65-74"/>
+      <xs:enumeration value="75 and over"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+</xs:schema>
